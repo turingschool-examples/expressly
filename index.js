@@ -13,17 +13,21 @@ app.use(express.static('public'));
 
 app.get('/', function (req, res){
   res.send(`<html><body>
-    <form action="/new-poll" method="post">
-      <label for="name">Name</label><br>
-      <input id="name" type="text" name="name"><br>
+    <form action="/poll/new" method="post">
+      <label for="name">Title</label><br>
+      <input id="name" type="text" name="poll[title]"><br>
+      <hr>
+      <input id="name" type="text" name="poll[responses][]" placeholder="Response #1"><br>
+      <input id="name" type="text" name="poll[responses][]" placeholder="Response #1"><br>
+      <input id="name" type="text" name="poll[responses][]" placeholder="Response #1"><br>
       <input type="submit" value="Save">
     </form>
     </body></html>`);
 });
 
-app.post('/new-poll', function (req, res) {
+app.post('/poll/new', function (req, res) {
   console.log(req.body);
-  res.send('You submited ' + req.body.name + '.');
+  res.send('You submited: ' + JSON.stringify(req.body) + '.');
 });
 
 http.listen(process.env.PORT || 3000, function(){
